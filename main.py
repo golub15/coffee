@@ -3,18 +3,19 @@ import sqlite3
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
-from PyQt5 import uic
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
+from main_ui import Ui_MainWindow1
+from addEditCoffeeForm import Ui_MainWindow
 
 
-class AddForm(QMainWindow):
+class AddForm(QMainWindow, Ui_MainWindow):
     submitted = pyqtSignal(tuple)
     
     def __init__(self):
         super().__init__()
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        self.setupUi(self)
 
-        self.connection = sqlite3.connect('coffee.sqlite')
+        self.connection = sqlite3.connect('data/coffee.sqlite')
         self.cursor = self.connection.cursor()
 
         self.loadRoastBox()
@@ -52,14 +53,14 @@ class AddForm(QMainWindow):
         self.close()
     
 
-class EditForm(QMainWindow):
+class EditForm(QMainWindow, Ui_MainWindow):
     submitted = pyqtSignal(tuple)
 
     def __init__(self):
         super().__init__()
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        self.setupUi(self)
 
-        self.connection = sqlite3.connect('coffee.sqlite')
+        self.connection = sqlite3.connect('data/coffee.sqlite')
         self.cursor = self.connection.cursor()
 
         self.loadRoastBox()
@@ -106,12 +107,12 @@ class EditForm(QMainWindow):
         self.close()
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow1):
     def __init__(self):
         super().__init__()
-        uic.loadUi('main.ui', self)
+        self.setupUi(self)
 
-        self.connection = sqlite3.connect('coffee.sqlite')
+        self.connection = sqlite3.connect('data/coffee.sqlite')
         self.cursor = self.connection.cursor()
 
         self.titles = ['ID', 'Название сорта', 'Степень обжарки',
