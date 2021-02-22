@@ -15,7 +15,7 @@ class AddForm(QMainWindow, Ui_MainWindow):
         super().__init__()
         pass
         self.setupUi(self)
-
+        #fdf
         self.connection = sqlite3.connect('data/coffee.sqlite')
         self.cursor = self.connection.cursor()
 
